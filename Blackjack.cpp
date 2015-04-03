@@ -1,3 +1,5 @@
+//The program is 21 points game. In this game, users should try to make his points closer to the 21 while the computer wants to do it also
+//Only the one get the points closer but not bigger than 21 wins.
 #include<iostream>
 #include<cstdlib>
 #include<ctime>
@@ -14,13 +16,14 @@ double Transfer(int);
 void twenty_one();
 
 
-int Show(int i )//显示牌号 
+
+int Show(int i )//show the cards 
 {
-string hua[4] = {"红桃", "黑桃" , "梅花" , "方块"};
+string hua[4] = {"Hearts", "Spade" , "Club" , "Diamond"};
 string num[13] =  {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 int a = i % 13 ;  // num 
 int b = i / 13 ; // hua
-cout<<hua[b]<<num[a]<<'\0'; 
+cout<<hua[b]<<'\0'<<num[a]<<'\0'; 
 }
 
 
@@ -34,9 +37,9 @@ return cards[52];
 }
 
 
-double Show_sentence(int card_num,int n )//输出玩家所获得牌&计算 
+double Show_sentence(int card_num,int n )//output the cards
 {
-int i , m ;//r_num 实际数字
+int i , m ;
 double sum_p = 0 , r_num; 
 for(i = n ; i < card_num ; ++i)
 	{
@@ -51,7 +54,7 @@ return sum_p;
 
 
 
-double Transfer(int i )//牌转化为所对应的分值 
+double Transfer(int i )// match the cards with the porints 
 {
 string num[13] =  {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 double r_num[13] = {1,2,3,4,5,6,7,8,9,10,0.5,0.5,0.5};
@@ -63,38 +66,38 @@ return r_num[a];
 
 void twenty_one()
 {
-Shuffle();	//洗牌 乱序排列一个数组 
-cout<<"玩家阶段"<<endl; 
-cout<<"玩家获得牌"<<'\0';
-int card_num , m ; //card_num 牌序 , m 所对应的数组中数 
+Shuffle();	//shuffle the cards, which means make the elements out of order
+cout<<"Player's Round'"<<endl; 
+cout<<"Player's Cards'"<<'\0';
+int card_num , m ; //card_num:the ordinal number , m:number with certain ordinal number 
 double sum_p = 0;
 sum_p = Show_sentence(2,0);
 char flag_card;	
-cout<<"是否继续要牌(y/n):"<<endl;
+cout<<"Whether to continue?(y/n):"<<endl;
 cin>> flag_card;
 
 card_num = 2;
 while(flag_card == 'y')
 	{
 	++card_num;	
-	cout<<"继续要一张牌："; 
+	cout<<"Continue："; 
 	sum_p = Show_sentence(card_num,0);
 	if (sum_p <= 21)
 		{
-		cout<<"是否继续要牌(y/n):"<<endl;
+		cout<<"Whether to continue?(y/n):"<<endl;
 		cin>> flag_card;
 		}
 	else 
 		{
-		cout<<"玩家输了"<<endl;
+		cout<<"Player Loses"<<endl;
 		break;
 		}
 	}
 
 if(sum_p <= 21 ) 
 	{
-	cout<<"电脑阶段"<<endl;
-	cout<<"电脑获得牌"<<'\0';
+	cout<<"Computer's Round'"<<endl;
+	cout<<"Computer's Cards'"<<'\0';
 	int card_num_c , m_c ;
 	double sum_p_c = 0;
 	sum_p_c = Show_sentence(23,21);
@@ -104,11 +107,11 @@ if(sum_p <= 21 )
 	while(sum_p_c < sum_p )
 	{
 		++card_num_c;	
-		cout<<"继续要一张牌："; 
+		cout<<"Continue："; 
 		sum_p_c = Show_sentence(card_num_c,21);
 		if (sum_p_c>21)
 			{
-			cout<<"玩家赢了"<<endl;
+			cout<<"Player Wins"<<endl;
 			break;
 			}
 		else 
@@ -117,19 +120,19 @@ if(sum_p <= 21 )
 			{
 				if (t1 < t2) 
 				{
-					cout<<"玩家输了"<<endl;
+					cout<<"Player Loses"<<endl;
 					break;
 				}
 				else
 				{
 					if(t1 == t2) 
 					{
-						cout<<"平局"<<endl;
+						cout<<"Draw"<<endl;
 						break;
 					}
 					else 
 					{
-						cout<<"玩家赢了"<<endl;
+						cout<<"Player Wins"<<endl;
 						break;
 					}
 			 	} 
@@ -137,7 +140,7 @@ if(sum_p <= 21 )
 			}
 		}
 	}
-	if (sum_p_c > sum_p && sum_p_c<21 ) cout<< "玩家输了"<<endl;
+	if (sum_p_c > sum_p && sum_p_c<21 ) cout<< "Player Loses"<<endl;
 	//cout<<sum_p_c<<'\0'<<sum_p<<endl;
 	//cout<<t1<<'\0'<<t2<<endl; 
 	}
@@ -149,7 +152,7 @@ int main()
 	do
 	{
 		twenty_one();
-		cout<<"是否继续(y/n):"<<endl;
+		cout<<"Whether to continue?(y/n):"<<endl;
 		cin>>flag;
 	}
 	while(flag=='y');
