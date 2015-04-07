@@ -14,7 +14,6 @@ int Show(int);
 double Show_sentence(int, int);
 double Transfer(int); 
 void twenty_one();
-char correction(char);
 
 
 
@@ -74,18 +73,19 @@ int card_num , m ; //card_num:the ordinal number , m:number with certain ordinal
 double sum_p = 0;
 sum_p = Show_sentence(2,0);
 char flag_card;	
-//cout<<"Whether to continue?(y/n):"<<endl;
-//cin>> flag_card;
-flag_card=correction(flag_card);
+cout<<"Whether to continue?(y/n):"<<endl;
+cin>> flag_card;
+
 card_num = 2;
-while(flag_card == 'y'||flag_card == 'Y')
+while(flag_card == 'y')
 	{
 	++card_num;	
 	cout<<"Continue£º"; 
 	sum_p = Show_sentence(card_num,0);
 	if (sum_p <= 21)
 		{
- 			flag_card=correction(flag_card);
+		cout<<"Whether to continue?(y/n):"<<endl;
+		cin>> flag_card;
 		}
 	else 
 		{
@@ -146,38 +146,15 @@ if(sum_p <= 21 )
 	}
 }
 
-char correction(char flag)
-{
-		while (true)
-		{
-		cout<<"Whether to continue?(y/n):"<<endl;
-		cin>>flag;	
-			
-		try 
-		{
-			if((flag!='y')&&(flag!='n')&&(flag!='Y')&&(flag!='N')) throw flag;
-			else {
-			return flag;}
-		}
-		catch (char)
-		{
-			{
-				cout<<"please input between Y/y/N/n"<<endl;
-				}
-			
-		}
-		}
-}
-
-
 int main()
 {	
 	char flag;
 	do
 	{
 		twenty_one();
-		flag=correction(flag);
+		cout<<"Whether to continue?(y/n):"<<endl;
+		cin>>flag;
 	}
-	while(flag =='y'||flag == 'Y');
+	while(flag=='y');
 	return 0;
 }
